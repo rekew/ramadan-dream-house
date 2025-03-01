@@ -26,7 +26,7 @@ async def free_juz(msg : Message):
     cursor.execute("SELECT * FROM users where telegram_id = ?", (msg.from_user.id,))
     row = cursor.fetchone()
     if row:
-        cursor.execute('SELECT juz FROM users where telegram_id = ?', (msg.from_user.id))
+        cursor.execute('SELECT juz FROM users where telegram_id = ?', (msg.from_user.id,))
         ans = cursor.fetchone()
         if ans:
             await msg.answer(f"Сіз {ans.get('juz')} таңдап алғансыз!")
