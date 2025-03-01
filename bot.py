@@ -5,6 +5,7 @@ from schedule import send_juz_selection, send_scheduled_message
 from handlers import router
 from config import bot
 import asyncio
+#asd
 
 dp = Dispatcher()
 
