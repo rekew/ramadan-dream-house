@@ -28,7 +28,7 @@ async def free_juz(msg : Message):
     if row:
         cursor.execute('SELECT juz FROM users where telegram_id = ?', (msg.from_user.id,))
         ans = cursor.fetchone()
-        if ans:
+        if ans[0]:
             await msg.answer(f"Сіз {ans[0]} таңдап алғансыз!")
         else:
             await msg.answer('Оқитын параны таңдаңыз!', reply_markup=get_juz_keyboard())
