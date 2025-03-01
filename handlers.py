@@ -26,7 +26,12 @@ async def free_juz(msg : Message):
     cursor.execute("SELECT * FROM users where telegram_id = ?", (msg.from_user.id,))
     row = cursor.fetchone()
     if row:
-        await msg.answer('Оқитын параны таңдаңыз!', reply_markup=get_juz_keyboard())
+        cursor.execute('SELECT juz FROM users where telegram_id = ?', (msg.from_user.id))
+        ans = cursor.fetchone()
+        if ans:
+            await msg.answer(f"Сіз {ans.get('juz')} таңдап алғансыз!")
+        else:
+            await msg.answer('Оқитын параны таңдаңыз!', reply_markup=get_juz_keyboard())
     else:
         await msg.answer("Біріншіден /registration жазыңыз!")
 
