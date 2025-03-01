@@ -1,11 +1,11 @@
-from aiogram import Dispatcher, Bot, F
+from aiogram import Dispatcher, F
 from aiogram.types import CallbackQuery
 from database import cursor, connection, get_taken_juz
 from schedule import send_juz_selection, send_scheduled_message
 from handlers import router
+from config import bot
 import asyncio
 
-bot = Bot(token = '8012951865:AAGIin62Vn2BmKon6BxtxUpduaFlB6uvtA8')
 dp = Dispatcher()
 
 @router.callback_query(F.data == 'done_Quran')

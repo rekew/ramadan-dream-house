@@ -1,7 +1,7 @@
 from datetime import datetime
 from database import cursor, connection, get_taken_juz, get_users, clear_user_table
 from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton, FSInputFile
-from bot import bot
+from config import bot
 import pandas as pd
 import asyncio
 import pytz
