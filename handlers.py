@@ -2,13 +2,33 @@ from aiogram.types import Message
 from aiogram.filters import Command
 from aiogram import Router
 from database import cursor, connection
+from schedule import get_juz_keyboard, send_user_table
 
 router = Router()
 
 @router.message(Command('start'))
 async def start_bot(msg : Message):
     await msg.answer('السلام عليكم')
-    await msg.answer('/registration жазыңыз!')
+    cursor.execute("SELECT * FROM users where telegram_id = ?", (msg.from_user.id,))
+    row = cursor.fetchone()
+    if row:   
+        await msg.answer("Параны алып алу үшін, /juz жазыңыз")
+    else:
+        await msg.answer('/registration жазыңыз!')
+
+@router.message(Command('excel'))
+async def send_excel(msg : Message):
+    await send_user_table()
+    await msg.answer('Excel жіберілді!')
+
+@router.message(Command('juz'))
+async def free_juz(msg : Message):
+    cursor.execute("SELECT * FROM users where telegram_id = ?", (msg.from_user.id,))
+    row = cursor.fetchone()
+    if row:
+        await msg.answer('Оқитын параны таңдаңыз!', reply_markup=get_juz_keyboard())
+    else:
+        await msg.answer("Біріншіден /registration жазыңыз!")
 
 @router.message(Command('registration'))
 async def registration(msg : Message):

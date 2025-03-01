@@ -33,7 +33,7 @@ async def send_juz_selection():
             users = get_users()
             for user_id in users:
                 try:
-                    await bot.send_message(user_id, 'Выберите джуз для чтения:', reply_markup=get_juz_keyboard())
+                    await bot.send_message(user_id, 'Оқитын параны таңдаңыз!', reply_markup=get_juz_keyboard())
                 except Exception as e:
                     print(f"Ошибка при отправке {user_id}: {e}")
             await send_user_table()
